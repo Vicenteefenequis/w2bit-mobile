@@ -1,10 +1,8 @@
-import { StyleSheet } from "react-native";
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent:"space-between",
-    },
-});
 
-export default styles;
+
+export const Container = styled.View`
+    justify-content:center;
+    align-items:center;
+`;

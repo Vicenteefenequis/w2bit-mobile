@@ -3,8 +3,17 @@ import { View, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 
-
-import styles from './styles';
+import {
+    Container,
+    WelcomeTitle,
+    WelcomSubdescription,
+    ContainerWelcome,
+    StyledButton,
+    TextButton,
+    ContainerRegister,
+    TextRegisterAccount,
+    TextNotHaveAccount
+} from './styles'
 
 
 function Landing(){
@@ -17,29 +26,28 @@ function Landing(){
         navigation.navigate('Login');
     }
     return (
-        <View style={styles.container}>
-            <View style={styles.containerTitle}>
+        <Container backgroundColor="#347AF0">
+            <ContainerWelcome>
                 <Image  source={require('../../assets/images/logo.png')}/>
-                <Text style={styles.title}>Bem Vindos ao</Text>
-                <Text style={styles.descriptionTitle}>DADOS COVID</Text>
-            </View>
-            <View style={styles.containerLogin}>
-                <RectButton onPress={handleNavigateToLogin}  style={[styles.button, styles.buttonSecondary]}>
-                    <Text style={styles.textLogin}>Login</Text>
-                </RectButton>
-                <View style={styles.containerRegister}>
-                    <Text style={styles.textRegister}>
+                <WelcomeTitle color="#FFF" >Bem Vindos ao</WelcomeTitle>
+                <WelcomSubdescription color="#FFFFFF">DADOS COVID</WelcomSubdescription>
+            </ContainerWelcome>
+            <View >
+                <StyledButton label="Enter" disabled={false}  backgroundColor="#FFFFFF" onPress={handleNavigateToLogin}>
+                    <TextButton color="#347AF0">Login</TextButton>
+                </StyledButton>
+                <ContainerRegister>
+                    <TextNotHaveAccount color="#FFFFFF">
                         Não tem conta?  {"  "}
-                    </Text>   
+                    </TextNotHaveAccount>   
                     <RectButton onPress={handleNavigateToRegister}>
-                            <Text style={styles.textButtonRegister}> 
+                            <TextRegisterAccount color="#FFFFFF" > 
                                 Registre-se
-                            </Text>
+                            </TextRegisterAccount>
                     </RectButton>              
-                </View>
+                </ContainerRegister>
             </View>
-           
-        </View>
+        </Container>
     )
 }
 
