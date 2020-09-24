@@ -22,10 +22,12 @@
     "react-dom": "16.13.1",
     "react-icons": "^3.11.0",
     "react-native": "^0.63.2",
+    "react-native-chart-kit": "^6.6.1",
     "react-native-elements": "^2.3.2",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-paper": "^4.2.0",
     "react-native-screens": "~2.10.1",
+    "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
     "styled-components": "^5.2.0"

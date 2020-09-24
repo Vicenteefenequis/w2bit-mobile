@@ -15,12 +15,11 @@ import {
     TextNotHaveAccount
 } from './styles'
 
-
 function Landing(){
     const navigation = useNavigation();
 
     function handleNavigateToRegister(){
-        navigation.navigate('Register');
+        navigation.navigate('Home');
     }
     function handleNavigateToLogin(){
         navigation.navigate('Login');
