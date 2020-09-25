@@ -10,26 +10,30 @@ export const Container = styled.View`
     flex:1;
     background-color:white;
 `;
-export const ContainerForPais = styled.View`
+export const CardForPais = styled.View`
     background-color:white;
     width:146px;
     height:30px;
     border-radius:100px;
-    margin-top:32px;
     justify-content:center;
     margin-left:24px;
 `;
 export const TextForDate = styled.Text`
     color:white;
     font-size:24px;
-    margin-left:24px;
     font-family:"TitilliumWeb_600SemiBold";
-    line-height:33px;
+    line-height:70px;
 `;
 export const Chart = styled.View`
     justify-content:center;
     align-items:center;
-    margin-top:42px;
+    margin-top:24px;
+`;
+export const ContainerNameUserAndCountries = styled.View`
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    
 `;
 
 

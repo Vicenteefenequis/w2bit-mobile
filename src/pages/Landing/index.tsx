@@ -19,7 +19,7 @@ function Landing(){
     const navigation = useNavigation();
 
     function handleNavigateToRegister(){
-        navigation.navigate('Home');
+        navigation.navigate('Register');
     }
     function handleNavigateToLogin(){
         navigation.navigate('Login');

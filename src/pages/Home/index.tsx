@@ -1,37 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {Text,ImageBackground,Dimensions } from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {View,ScrollView} from 'react-native'
+import {View,ScrollView,Button} from 'react-native'
+import IconExit from 'react-native-vector-icons/MaterialCommunityIcons'
 import frameHome from '../../assets/images/framehome.png';
 import Constants from 'expo-constants';
+
+
 import {
     Container,
-    ContainerForPais,
+    CardForPais,
     TextForDate,
     Chart,
     Informacoes,
     Card,
     TextCard,
     TextCardDescription,
-    ButtonInforme
+    ButtonInforme,
+    ContainerNameUserAndCountries
 } from './styles'
 import {
     LineChart,
   } from "react-native-chart-kit";
+import {useAuth} from "../../contexts/auth";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 function Home(){
     const {navigate} = useNavigation();
+
+    const {signOut,user} = useAuth();
+
+    function handleSignOut(){
+        signOut();
+    }
+
     return (
         <Container>
-            
                 <ImageBackground source={frameHome} resizeMode="stretch" style={{width:'100%',height:230,justifyContent:'center'}}>
-                    <TextForDate>Dados de Contágil</TextForDate>
-                    <ContainerForPais>
-                        <Text style={{marginLeft:12}}>Brazil</Text>
-                    </ContainerForPais>
+                            <TouchableOpacity style={{width:42}} onPress={handleSignOut}>
+                                <IconExit style={{marginLeft:12}} name='exit-to-app' size={24} color="#FFFFFF"/>
+                            </TouchableOpacity>
+                   <View style={{flexDirection:'column',justifyContent:'center',marginLeft:12}}>
+                        <TextForDate>Dados de contaminados</TextForDate>
+                   </View>
+                    
+                    <ContainerNameUserAndCountries>
+                        <CardForPais>
+                            <Text style={{marginLeft:12}}>Country Brazil</Text>
+                        </CardForPais>
+                        <Text style={{margin:16,color:"#ffffff",fontSize:16}}>{user?.name}</Text>
+                    </ContainerNameUserAndCountries>
                 </ImageBackground>
-
                 <Chart>
                     <Text>Grafico de Confirmados</Text>
                     <LineChart
