@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {AppLoading} from 'expo'
-import {Text} from 'react-native'
 import * as Font from 'expo-font';
 import {TitilliumWeb_300Light,TitilliumWeb_400Regular,TitilliumWeb_600SemiBold} from '@expo-google-fonts/titillium-web'
+import {AuthProvider} from './src/contexts/auth'
+import {ThemeProvider} from 'styled-components'
+import defaultTheme from './src/styles/default'
+import { NavigationContainer } from '@react-navigation/native'
 
-
-import Routes from './src/routes'
+import Routes from './src/routes';
 
 
 export default function App() {
@@ -19,11 +20,20 @@ export default function App() {
   if(!fontsLoaded){
     return <AppLoading/>
   }
+
+
+  
+
   return (
-      <>
-          <StatusBar style="light" translucent/>
+  <ThemeProvider theme={defaultTheme}>
+    <NavigationContainer>
+      <AuthProvider>
           <Routes/>
-      </>
+      </AuthProvider>
+    </NavigationContainer>
+  </ThemeProvider>
+   
+     
   );
 }
 
