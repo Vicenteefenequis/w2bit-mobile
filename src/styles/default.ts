@@ -13,7 +13,11 @@ const defaultTheme: DefaultTheme = {
     inputs: '#3D4C63',
     shape: '#3E3B47',
     blackMedium: '#28262E',
-    error: '#c53030',
+    error: '#F85859',
+    mortos:'#FAB259',
+    recuperados:'#4CD97C',
+    ativos:'#4C79FF',
+    graves: '#473F97'
   },
 
   fonts: {

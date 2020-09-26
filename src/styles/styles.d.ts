@@ -14,7 +14,10 @@ declare module 'styled-components' {
       inputs: string;
       shape: string;
       blackMedium: string;
-
+      mortos:string;
+      recuperados:string;
+      ativos:string;
+      graves:string;
       error: string;
     };
 
