@@ -3,7 +3,7 @@ import { Image, Alert, TextInput, ScrollView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import { Container, ContainerInputs, TextButton, PickerContainer } from './styles'
+import { Container, ContainerInputs, TextButton, PickerContainer,TextPaginaRegister } from './styles'
 import { firebase } from '../../services/firebase';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -111,11 +111,14 @@ function Register() {
   return (
     <Container>
       <Image source={require('../../assets/images/register.png')} />
+      <TextPaginaRegister>Faça seu Registro</TextPaginaRegister>
       <ContainerInputs>
+      
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingVertical: 20 }}
         >
+        
           <Form ref={formRef} onSubmit={handleSignUp}>
             <Input
               autoCapitalize="words"

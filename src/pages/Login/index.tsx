@@ -1,8 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
-import { Alert, Image, TextInput, View, ActivityIndicator } from "react-native";
+import { Alert, Image, TextInput, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
-import { firebase } from '../../services/firebase'
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup'
@@ -16,6 +15,7 @@ import {
   TextRegisterAccount,
   TextNotHaveAccount,
   TextButton,
+  TextPaginaLogin
 } from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Input from '../../components/Input';
@@ -85,6 +85,7 @@ function Login() {
       <ImageContainer>
         <Image source={require('../../assets/images/login.png')} />
       </ImageContainer>
+      <TextPaginaLogin>Faça seu Login</TextPaginaLogin>
       <ContainerInputs>
         <Form ref={formRef} onSubmit={handleSingIn}>
           <Input

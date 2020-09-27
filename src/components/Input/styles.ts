@@ -34,7 +34,6 @@ export const Container = styled.View<ContainerProps>`
       border-color: ${props.theme.colors.blue};
     `}
 `;
-
 export const TextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.colors.inputs,
 }))`

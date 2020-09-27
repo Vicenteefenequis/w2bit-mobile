@@ -15,6 +15,13 @@ export const ImageContainer = styled.View`
     width:100%;
     align-items:center;
 `;
+export const TextPaginaLogin = styled.Text`
+    font-family:${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.grayHard};
+    font-size:24px;
+`;
+
+
 
 export const ContainerInputs = styled.View`
      width:80%;

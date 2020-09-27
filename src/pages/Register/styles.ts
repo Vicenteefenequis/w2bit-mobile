@@ -12,6 +12,15 @@ export const Container = styled.View`
     background-color:white;
 `;
 
+export const TextPaginaRegister = styled.Text`
+    justify-content:center;
+    align-items:flex-end;
+    font-family:${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.grayHard};
+    font-size:24px;
+`;
+
+
 export const ContainerInputs = styled.View`
     width:80%;
 `;
