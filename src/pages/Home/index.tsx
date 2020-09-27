@@ -1,162 +1,125 @@
 import React, { useState, useEffect, useContext } from "react";
-import {Text,ImageBackground,Dimensions } from "react-native";
+import {Text,ImageBackground,Dimensions, Alert } from "react-native";
 import {useNavigation} from "@react-navigation/native";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {View,ScrollView,Button} from 'react-native'
 import IconExit from 'react-native-vector-icons/MaterialCommunityIcons'
 import frameHome from '../../assets/images/framehome.png';
-import Constants from 'expo-constants';
-
+import api from '../../services/api'
+import SwitchSelector, { ISwitchSelectorOption } from "react-native-switch-selector";
 
 import {
-    Container,
-    CardForPais,
-    TextForDate,
-    Chart,
-    Informacoes,
-    Card,
-    TextCard,
-    TextCardDescription,
-    ButtonInforme,
-    ContainerNameUserAndCountries
+  Container,
+  CardForPais,
+  TextForDate,
+  Informacoes,
+  Card,
+  TextCard,
+  TextCardDescription,
+  ButtonInforme,
+  ContainerNameUserAndCountries
 } from './styles'
-import {
-    LineChart,
-  } from "react-native-chart-kit";
+
 import {useAuth} from "../../contexts/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { format } from "path";
 
-function Home(){
-    const {navigate} = useNavigation();
-
-    const {signOut,user} = useAuth();
-
-    function handleSignOut(){
-        signOut();
-    }
-
-    return (
-        <Container>
-                <ImageBackground source={frameHome} resizeMode="stretch" style={{width:'100%',height:230,justifyContent:'center'}}>
-                            <TouchableOpacity style={{width:42}} onPress={handleSignOut}>
-                                <IconExit style={{marginLeft:12}} name='exit-to-app' size={24} color="#FFFFFF"/>
-                            </TouchableOpacity>
-                   <View style={{flexDirection:'column',justifyContent:'center',marginLeft:12}}>
-                        <TextForDate>Dados de contaminados</TextForDate>
-                   </View>
-                    
-                    <ContainerNameUserAndCountries>
-                        <CardForPais>
-                            <Text style={{marginLeft:12}}>Country Brazil</Text>
-                        </CardForPais>
-                        <Text style={{margin:16,color:"#ffffff",fontSize:16}}>{user?.name}</Text>
-                    </ContainerNameUserAndCountries>
-                </ImageBackground>
-                <Chart>
-                    <Text>Grafico de Confirmados</Text>
-                    <LineChart
-                        data={{
-                        labels: ["January", "February", "March", "April", "May", "June"],
-                        datasets: [
-                            {
-                            data: [
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100
-                            ]
-                            }
-                        ]
-                        }}
-                        width={Dimensions.get("window").width} // from react-native
-                        height={230}
-                        yAxisLabel="$"
-                        yAxisSuffix="k"
-                        yAxisInterval={1} // optional, defaults to 1
-                        chartConfig={{
-                        backgroundColor: "#3D278A",
-                        backgroundGradientFrom: "#ffffff",
-                        backgroundGradientTo: "#FFFFFF",
-                        decimalPlaces: 2, // optional, defaults to 2dp
-                        color: (_) => `#007AFE`,
-                        labelColor: (_) => `#007AFE`,
-                        style: {
-                            borderRadius: 16
-                        },
-                        propsForDots: {
-                            r: "6",
-                            strokeWidth: "2",
-                            stroke: "#ffffff"
-                        }
-                        }}
-                        bezier
-                        style={{
-                        marginVertical: 8,
-                        borderRadius: 16
-                        }}
-                    />
-               </Chart>
-               <Informacoes color="#FBFBFD">
-                  <Text style={{padding:24,fontWeight:'bold',fontSize:24}}>Suas Informações</Text>
-                  <ScrollView  
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ paddingVertical: 20 }}
-                  >
-                  <Card color="#EAF4FE">
-                    <View>
-                        <TextCard>Julho</TextCard>
-                        <TextCardDescription color="#8C92A4">Informe Completo</TextCardDescription>
-                    </View>
-                    <View>
-                        <ButtonInforme color="#CAE6FC">
-                        <Icon  
-                        name='list'
-                        size={24}
-                        color='#37C6F7'
-                        />
-                        </ButtonInforme>
-                    </View>
-                  </Card>
-                  <Card color="#EAF4FE">
-                    <View>
-                        <TextCard>Junho</TextCard>
-                        <TextCardDescription color="#8C92A4">Informe Completo</TextCardDescription>
-                    </View>
-                    <View>
-                        <ButtonInforme color="#CAE6FC">
-                        <Icon  
-                        name='list'
-                        size={24}
-                        color='#37C6F7'
-                        />
-                        </ButtonInforme>
-                    </View>
-                  </Card>
-                  <Card color="#EAF4FE">
-                    <View>
-                        <TextCard>Agosto</TextCard>
-                        <TextCardDescription color="#8C92A4">Informe Completo</TextCardDescription>
-                    </View>
-                    <View>
-                        <ButtonInforme color="#CAE6FC">
-                        <Icon  
-                        name='list'
-                        size={24}
-                        color='#37C6F7'
-                        />
-                        </ButtonInforme>
-                    </View>
-                  </Card>
-
-                  </ScrollView>
-                  
-                  
-               </Informacoes>
-        </Container>
-
-    )
+interface ResponseData{
+  country?:string;
+  confirmed:string;
+  recovered:string;
+  critical:number;
+  deaths:number;
+  code?:string;
 }
+function Home(){
+  const {navigate} = useNavigation();
+  const [infoPaises,setInfoPaises] = useState<ResponseData>({} as ResponseData);
+  const {signOut,user} = useAuth();
+  const [switchPais,setSwitchPais] = useState<string | ISwitchSelectorOption | number>(`${user?.pais}`);
+  const [loading,setLoading] = useState(false);
+  
+  
+  useEffect(()=>{
+    
+    setLoading(true);
+    
+    api.get(switchPais === 'global' ? '/totals' : '/country' ,{
+      params:{
+        format:"json",name:`${user?.pais}`
+      }
+    }).then(response => {
+      setInfoPaises(response.data[0])
+      setLoading(false);
+    }).catch(err => {
+      Alert.alert(err.message)
+      setLoading(false);
+    })
+    
+  },[switchPais])
+  
+  
+  function handleSignOut(){
+    signOut();
+  }
+  
+  
+  return (
+    <Container>
+      <ImageBackground source={frameHome} resizeMode="stretch" style={{ width: '100%', height: 276 }}>
+        <TouchableOpacity style={{ width: 42, marginTop: 42 }} onPress={handleSignOut}>
+          <IconExit style={{ marginLeft: 12 }} name='exit-to-app' size={24} color="#FFFFFF" />
+        </TouchableOpacity>
+        <TextForDate>Dados de Contaminados</TextForDate>
+        <ContainerNameUserAndCountries>
+          <CardForPais>
+            <Text style={{ marginLeft: 12 }}>{user?.name}</Text>
+          </CardForPais>
+          <CardForPais>
+            <SwitchSelector
+              options={[
+                { label: `${user?.pais}`, value: `${user?.pais}` },
+                { label: "Global", value: "global" }
+              ]}
+              initial={0}
+              buttonColor="#86C0FF"
+              onPress={value => setSwitchPais(value)}
+              disabled={loading}
+            />
+          </CardForPais>
+        </ContainerNameUserAndCountries>
+      </ImageBackground>
+      <Informacoes color="#FBFBFD">
 
-export default Home;
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingVertical: 20 }}
+        >
+          <View>
+            <Card name="infectados">
+              <TextCard>Confirmados</TextCard>
+              <TextCardDescription>{infoPaises.confirmed}</TextCardDescription>
+            </Card>
+            <Card name="mortos">
+              <TextCard>Mortos</TextCard>
+              <TextCardDescription>{infoPaises.deaths}</TextCardDescription>
+            </Card>
+            <Card name="recuperados">
+              <TextCard>Recuperados</TextCard>
+              <TextCardDescription>{infoPaises.recovered}</TextCardDescription>
+            </Card>
+            <Card name="graves">
+              <TextCard>Graves</TextCard>
+              <TextCardDescription>{infoPaises.critical}</TextCardDescription>
+            </Card>
+          </View>
+
+        </ScrollView>
+
+
+      </Informacoes>
+    </Container>
+    
+    )
+  }
+  
+  export default Home;
