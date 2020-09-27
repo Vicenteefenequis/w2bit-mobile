@@ -29,7 +29,6 @@
 <span align="center"><img src="docs/Welcome%20Screen.png"/></span>
 <span align="center"><img src="docs/Registro.png"/></span>
 <span align="center"><img src="docs/Login.png"/></span>
-
 <span align="center"><img src="docs/Informes.png"/></span>
 
 
