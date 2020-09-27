@@ -26,19 +26,18 @@ export const ContainerInfo = styled.View`
 `
 
 export const TextRegisterAccount = styled.Text<Props>`
-    color: ${props => props.color};
-    font-family:"TitilliumWeb_600SemiBold";
+    color: ${({ theme }) => theme.colors.blue};
+    font-family:${({ theme }) => theme.fonts.medium};
     font-size:18px;
 `
 export const TextNotHaveAccount = styled.Text<Props>`
-    color: ${props => props.color};
+    color: ${({ theme }) => theme.colors.grayHard};
     font-size:15px;
     opacity:0.7;
 `
 
 
 export const Button = styled.TouchableOpacity<Props>`
-    background-color:${props => props.color};
     margin-bottom:42px;
     width:80%;
     padding:12px;
@@ -48,5 +47,5 @@ export const Button = styled.TouchableOpacity<Props>`
 
 export const TextButton = styled.Text`
     color:white;
-    font-family:"TitilliumWeb_600SemiBold";
+    font-family:${({ theme }) => theme.fonts.medium};
 `;

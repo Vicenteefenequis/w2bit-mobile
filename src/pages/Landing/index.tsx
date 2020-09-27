@@ -15,35 +15,35 @@ import {
     TextNotHaveAccount
 } from './styles'
 
-function Landing(){
+function Landing() {
     const navigation = useNavigation();
 
-    function handleNavigateToRegister(){
+    function handleNavigateToRegister() {
         navigation.navigate('Register');
     }
-    function handleNavigateToLogin(){
+    function handleNavigateToLogin() {
         navigation.navigate('Login');
     }
     return (
         <Container backgroundColor="#347AF0">
             <ContainerWelcome>
-                <Image  source={require('../../assets/images/logo.png')}/>
+                <Image source={require('../../assets/images/logo.png')} />
                 <WelcomeTitle color="#FFF" >Bem Vindos ao</WelcomeTitle>
                 <WelcomSubdescription color="#FFFFFF">DADOS COVID</WelcomSubdescription>
             </ContainerWelcome>
             <View >
-                <StyledButton label="Enter" disabled={false}  backgroundColor="#FFFFFF" onPress={handleNavigateToLogin}>
+                <StyledButton label="Enter" disabled={false} backgroundColor="#FFFFFF" onPress={handleNavigateToLogin}>
                     <TextButton color="#347AF0">Login</TextButton>
                 </StyledButton>
                 <ContainerRegister>
                     <TextNotHaveAccount color="#FFFFFF">
                         Não tem conta?  {"  "}
-                    </TextNotHaveAccount>   
+                    </TextNotHaveAccount>
                     <RectButton onPress={handleNavigateToRegister}>
-                            <TextRegisterAccount color="#FFFFFF" > 
-                                Registre-se
+                        <TextRegisterAccount color="#FFFFFF" >
+                            Registre-se
                             </TextRegisterAccount>
-                    </RectButton>              
+                    </RectButton>
                 </ContainerRegister>
             </View>
         </Container>

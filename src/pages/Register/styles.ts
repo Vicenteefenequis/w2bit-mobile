@@ -15,16 +15,18 @@ export const Container = styled.View`
 export const ContainerInputs = styled.View`
     width:80%;
 `;
-export const Button = styled.TouchableOpacity<Props>`
-    background-color:${props => props.color};
-    margin-bottom:42px;
-    width:80%;
-    padding:12px;
-    align-items:center;
-    border-radius:100px;
+export const PickerContainer = styled.View`
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.inputs};
+
 `;
+
+
 
 export const TextButton = styled.Text`
     color:white;
-    font-family:"TitilliumWeb_600SemiBold";
+    font-family: ${({ theme }) => theme.fonts.medium};
 `;

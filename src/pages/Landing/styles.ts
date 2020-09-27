@@ -7,12 +7,10 @@ interface ButtonInterface{
     disabled: boolean;
     backgroundColor:string;
  }
-
 interface Props{
     backgroundColor?:string;
     color?:string;
 }
-
 export const Container = styled.View<Props>`
     flex: 1;
     justify-content:space-around;
@@ -20,19 +18,19 @@ export const Container = styled.View<Props>`
 `;
 
 export const WelcomeTitle = styled.Text<Props>`
-    font-family:"TitilliumWeb_400Regular";
+    font-family:${({ theme }) => theme.fonts.regular};
     font-size:28px;
     opacity:0.4;
     margin-top:24px;
-    color: ${props => props.color};       
+    color: ${({ theme }) => theme.colors.white};   
         
 `;
 
 
 export const WelcomSubdescription = styled.Text<Props>`
-    font-family:"TitilliumWeb_300Light";
+    font-family:${({ theme }) => theme.fonts.regular};
     font-size:48px;
-    color:${props => props.color};
+    color:${({ theme }) => theme.colors.white};
 `;
 
 export const ContainerWelcome = styled.View<Props>`
@@ -47,14 +45,13 @@ export const StyledButton = styled.TouchableOpacity<ButtonInterface>`
     padding: 24px;
     justify-content: center;
     align-items:center;
-
-    background-color: ${props => props.backgroundColor};
+    background-color:${({ theme }) => theme.colors.white};
     margin-bottom:24px;;
 `;
 
 export const TextButton = styled.Text<Props>`
-    color: ${props => props.color};
-    font-family:"TitilliumWeb_600SemiBold";
+    color: ${({ theme }) => theme.colors.blue};
+    font-family:${({ theme }) => theme.fonts.medium};
     font-size:16px;
 `
 
@@ -65,11 +62,11 @@ export const ContainerRegister = styled.View`
 
 export const TextRegisterAccount = styled.Text<Props>`
     color: ${props => props.color};
-    font-family:"TitilliumWeb_600SemiBold";
+    font-family:${({ theme }) => theme.fonts.medium};
     font-size:18px;
 `
 export const TextNotHaveAccount = styled.Text<Props>`
-    color: ${props => props.color};
+    color: ${({ theme }) => theme.colors.white};
     font-size:15px;
     opacity:0.7;
 `
