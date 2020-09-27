@@ -1,6 +1,7 @@
 import React from 'react';
 import {AppLoading} from 'expo'
 import * as Font from 'expo-font';
+import {StatusBar} from 'react-native'
 import {TitilliumWeb_300Light,TitilliumWeb_400Regular,TitilliumWeb_600SemiBold} from '@expo-google-fonts/titillium-web'
 import {AuthProvider} from './src/contexts/auth'
 import {ThemeProvider} from 'styled-components'
@@ -29,6 +30,7 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
           <Routes/>
+          <StatusBar translucent backgroundColor="transparent" barStyle="default"/>
       </AuthProvider>
     </NavigationContainer>
   </ThemeProvider>

@@ -8,6 +8,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+.env
+databaseKeyAcess.json
 # macOS
 .DS_Store
+rapidApiKeyAcess.json

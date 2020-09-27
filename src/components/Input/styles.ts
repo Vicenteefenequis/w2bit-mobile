@@ -19,7 +19,7 @@ export const Container = styled.View<ContainerProps>`
   background: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   margin-bottom: 8px;
-  border-width: 2px;
+  border-width: 1px;
   border-color: ${({ theme }) => theme.colors.inputs};
   flex-direction: row;
   align-items: center;
@@ -50,6 +50,6 @@ export const Icon = styled(FeatherIcon)<IconProps>`
   ${props =>
     (props.isFocused || props.isFilled) &&
     css`
-      color: ${props.theme.colors.grayHard};
+      color: ${props.theme.colors.blue};
     `}
 `;

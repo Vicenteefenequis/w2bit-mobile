@@ -15,11 +15,12 @@ export  function signIn(email:string,password:string):Promise<Response>{
         setTimeout(() => {
            firebase.auth().signInWithEmailAndPassword(email,password).then(response => {
             firebase.database().ref(`/users/${response.user?.uid}`).once('value').then(dados => {
+                console.log(dados.val())
                 resolve({
                     user: {
-                        name:dados.val().name,
+                        name:dados.val().nome,
                         pais:dados.val().pais,
-                        email:response.user?.email,
+                        email:dados.val().email,
                     },
                    })
                })   
