@@ -7,11 +7,12 @@ import React, {
     forwardRef,
     ForwardRefRenderFunction
   } from 'react';
-  import { TextInputProps, ViewStyle, StyleProp } from 'react-native';
+  import { TextInputProps, ViewStyle, StyleProp,Text } from 'react-native';
   
   import { useField } from '@unform/core';
   
   import { Container, Icon,TextInput } from './styles';
+import { red100 } from 'react-native-paper/lib/typescript/src/styles/colors';
   
   interface InputProps extends TextInputProps {
     name: string;
@@ -33,7 +34,7 @@ import React, {
   ) => {
     const inputElementRef = useRef<any>(null);
   
-    const { registerField, defaultValue = '', fieldName, error } = useField(name);
+    const { registerField, defaultValue = '', fieldName, error,clearError } = useField(name);
     const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
   
     const [isFocused, setIsFocused] = useState(false);
@@ -80,12 +81,14 @@ import React, {
             defaultValue={defaultValue}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-
             onChangeText={value => {
                 inputValueRef.current.value = value;
             }}
             {...rest}
        />
+       {error && (
+         isFocused ? (!error)  :  <Text style={{color:"red"}}>{error}</Text> 
+       )}
       </Container>
     );
   };
