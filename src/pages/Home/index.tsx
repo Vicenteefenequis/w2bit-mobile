@@ -6,7 +6,6 @@ import IconExit from 'react-native-vector-icons/MaterialCommunityIcons'
 import frameHome from '../../assets/images/framehome.png';
 import api from '../../services/api'
 import SwitchSelector, { ISwitchSelectorOption } from "react-native-switch-selector";
-
 import {
   Container,
   CardForPais,
@@ -18,15 +17,15 @@ import {
   ButtonInforme,
   ContainerNameUserAndCountries
 } from './styles'
-
 import {useAuth} from "../../contexts/auth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { format } from "path";
+import  formatNumber  from "../../utils/getNumberFormat";
 
 interface ResponseData{
   country?:string;
-  confirmed:string;
-  recovered:string;
+  confirmed:number;
+  recovered:number;
   critical:number;
   deaths:number;
   code?:string;
@@ -97,25 +96,22 @@ function Home(){
           <View>
             <Card name="infectados">
               <TextCard>Confirmados</TextCard>
-              <TextCardDescription>{infoPaises.confirmed}</TextCardDescription>
+              <TextCardDescription> {formatNumber(infoPaises.confirmed)} </TextCardDescription>
             </Card>
             <Card name="mortos">
               <TextCard>Mortos</TextCard>
-              <TextCardDescription>{infoPaises.deaths}</TextCardDescription>
+              <TextCardDescription>{formatNumber(infoPaises.deaths)}</TextCardDescription>
             </Card>
             <Card name="recuperados">
               <TextCard>Recuperados</TextCard>
-              <TextCardDescription>{infoPaises.recovered}</TextCardDescription>
+              <TextCardDescription>{formatNumber(infoPaises.recovered)}</TextCardDescription>
             </Card>
             <Card name="graves">
               <TextCard>Graves</TextCard>
-              <TextCardDescription>{infoPaises.critical}</TextCardDescription>
+              <TextCardDescription>{formatNumber(infoPaises.critical)}</TextCardDescription>
             </Card>
           </View>
-
         </ScrollView>
-
-
       </Informacoes>
     </Container>
     
