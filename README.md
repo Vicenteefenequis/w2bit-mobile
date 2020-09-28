@@ -76,6 +76,8 @@ Run the following command in order to start the application in a development env
 ```expo start```
 
 
+**If run on Mobile You need to install the [Expo](https://expo.io/) app available on the PlayStore for Android and AppStore for IOS ,You can run on iOS Emulator and Android Emulator.**
+
 # :postbox: Faq
 
 **Question:** What are the tecnologies used in this project?
